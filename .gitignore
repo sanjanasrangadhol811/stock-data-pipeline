@@ -1,0 +1,13 @@
+# Protect secrets
+.env
+
+# Ignore logs  
+logs/
+
+# Airflow files
+airflow.cfg
+airflow.db
+
+# Python cache
+__pycache__/
+*.pyc
