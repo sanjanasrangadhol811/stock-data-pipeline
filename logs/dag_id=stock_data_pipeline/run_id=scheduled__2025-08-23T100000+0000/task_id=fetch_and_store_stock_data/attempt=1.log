@@ -1,0 +1,29 @@
+[2025-08-23T10:53:49.231+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: stock_data_pipeline.fetch_and_store_stock_data scheduled__2025-08-23T10:00:00+00:00 [queued]>
+[2025-08-23T10:53:49.251+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: stock_data_pipeline.fetch_and_store_stock_data scheduled__2025-08-23T10:00:00+00:00 [queued]>
+[2025-08-23T10:53:49.252+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-08-23T10:53:49.280+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): fetch_and_store_stock_data> on 2025-08-23 10:00:00+00:00
+[2025-08-23T10:53:49.305+0000] {standard_task_runner.py:60} INFO - Started process 2202 to run task
+[2025-08-23T10:53:49.316+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'stock_data_pipeline', 'fetch_and_store_stock_data', 'scheduled__2025-08-23T10:00:00+00:00', '--job-id', '27', '--raw', '--subdir', 'DAGS_FOLDER/stock_pipeline.py', '--cfg-path', '/tmp/tmp1p5l78_f']
+[2025-08-23T10:53:49.322+0000] {standard_task_runner.py:88} INFO - Job 27: Subtask fetch_and_store_stock_data
+[2025-08-23T10:53:49.378+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.8/site-packages/***/settings.py:194 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-08-23T10:53:49.508+0000] {task_command.py:423} INFO - Running <TaskInstance: stock_data_pipeline.fetch_and_store_stock_data scheduled__2025-08-23T10:00:00+00:00 [running]> on host 7e13cf32b315
+[2025-08-23T10:53:50.114+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='stock_data_pipeline' AIRFLOW_CTX_TASK_ID='fetch_and_store_stock_data' AIRFLOW_CTX_EXECUTION_DATE='2025-08-23T10:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-23T10:00:00+00:00'
+[2025-08-23T10:53:50.133+0000] {fetch_stock_data.py:53} INFO - Stock table created or already exists
+[2025-08-23T10:53:50.135+0000] {fetch_stock_data.py:155} ERROR - Pipeline failed: API key not found in environment variables
+[2025-08-23T10:53:50.139+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/../scripts/fetch_stock_data.py", line 144, in main
+    data = fetch_stock_data()
+  File "/opt/airflow/dags/../scripts/fetch_stock_data.py", line 68, in fetch_stock_data
+    raise ValueError("API key not found in environment variables")
+ValueError: API key not found in environment variables
+[2025-08-23T10:53:50.170+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=stock_data_pipeline, task_id=fetch_and_store_stock_data, execution_date=20250823T100000, start_date=20250823T105349, end_date=20250823T105350
+[2025-08-23T11:00:39.225+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 27 for task fetch_and_store_stock_data (API key not found in environment variables; 2202)
+[2025-08-23T11:00:39.284+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-08-23T11:00:39.343+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
